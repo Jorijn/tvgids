@@ -143,7 +143,34 @@
 	<body>
 <?php
 
-$channels = json_decode(file_get_contents('http://www.tvgids.nl/json/lists/channels.php'));
+function tv_get_contents($url)
+{
+	static $memcached;
+
+	if (class_exists('Memcache'))
+	{
+		$memcached = new Memcache;
+		$memcached->connect('127.0.0.1', 11211);
+
+		$key = 'tvgids_'.md5($url);
+		if (($result = $memcached->get($key)) !== false)
+		{
+			return $result;
+		}
+		else
+		{
+			$result = file_get_contents($url);
+			$memcached->set($key, $result, MEMCACHE_COMPRESSED, strtotime(date('Y-m-d', strtotime('+ 1 day')))); // set till midnight
+			return $result;
+		}
+	}
+	else
+	{
+		return file_get_contents($url);
+	}
+}
+
+$channels = json_decode(tv_get_contents('http://www.tvgids.nl/json/lists/channels.php'));
 
 echo '<div class="channels" id="channels">';
 echo '<div class="timetable">';
@@ -169,7 +196,7 @@ foreach ($channels as $channel)
 	  public 'name' => string 'Nederland 1' (length=11)
 	  public 'name_short' => string 'Ned 1' (length=5)
 	 */
-	$programs = json_decode(file_get_contents('http://www.tvgids.nl/json/lists/programs.php?channels='.$channel->id.'&day=0'));
+	$programs = json_decode(tv_get_contents('http://www.tvgids.nl/json/lists/programs.php?channels='.$channel->id.'&day=0'));
 	$programs = $programs->{$channel->id};
 
 	/*
