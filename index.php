@@ -141,6 +141,8 @@
 		</script>
 	</head>
 	<body>
+	<a href="https://github.com/Jorijn/tvgids" target="_blank"><img style="position: fixed; top: 0; right: 0; border: 0;z-index: 10" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
 <?php
 
 function tv_get_contents($url)
