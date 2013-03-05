@@ -4,4 +4,4 @@ I got fed up with the current supply on online services that offer insight into 
 
 Fork and improve if you must, who knows what might come of it.
 
-![Screenshot](jorijn.github.com/tvgids/screenshot.png)
+![Screenshot](https://raw.github.com/Jorijn/tvgids/master/screenshot.png)

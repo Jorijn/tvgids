@@ -233,7 +233,7 @@ foreach ($data as $channel_id => $programs)
 		}
 
 		// titel & genre, datum_start & datum_end
-		echo '<div class="'.(strtotime($program->datum_start) < time() && strtotime($program->datum_eind) > time() ? 'now ' : '').'program" style="width: '.$width.'px; margin-left: '.$prefix.'px" title="'.htmlspecialchars($program->titel).'">';
+		echo '<div class="'.(strtotime($program->datum_start) < time() && strtotime($program->datum_end) > time() ? 'now ' : '').'program" style="width: '.$width.'px; margin-left: '.$prefix.'px" title="'.htmlspecialchars($program->titel).'">';
 		echo '<span class="time">'.date('H:i', strtotime($program->datum_start)).'</span> ';
 		echo '<span class="name">'.htmlspecialchars($program->titel).'</span>';
 		echo '</div>';
