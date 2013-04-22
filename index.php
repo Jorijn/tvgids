@@ -145,6 +145,9 @@
 
 <?php
 
+// set timezone to the dutchieworld.
+date_default_timezone_set('Europe/Amsterdam');
+
 function tv_get_contents($url)
 {
 	static $memcached;
